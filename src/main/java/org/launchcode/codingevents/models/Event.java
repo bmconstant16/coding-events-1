@@ -25,10 +25,10 @@ public class Event extends AbstractEntity {
     private EventDetails eventDetails;
 
     @ManyToOne
-    @NotNull(message = "Category is required.")
+    @NotNull(message = "Category is required")
     private EventCategory eventCategory;
 
-    public Event(String name, String description, String contactEmail, EventCategory eventCategory) {
+    public Event(String name, EventCategory eventCategory) {
         this.name = name;
         this.eventCategory = eventCategory;
     }
@@ -63,6 +63,5 @@ public class Event extends AbstractEntity {
     public String toString() {
         return name;
     }
-
 
 }
