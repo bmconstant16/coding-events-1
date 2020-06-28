@@ -21,8 +21,6 @@ public class EventController {
     @Autowired
     private EventRepository eventRepository;
 
-    //findAll, save, findById
-
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
@@ -34,7 +32,7 @@ public class EventController {
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());
-        model.addAttribute("types", EventType.values()); //returns the values available
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
 

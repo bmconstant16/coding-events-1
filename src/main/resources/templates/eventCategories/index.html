@@ -11,9 +11,10 @@
         <th>Category Name</th>
     </tr>
     </thead>
-    <tr th:each="item : ${categories}">
-        <td th:text="${item.name}"></td>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.name}"></td>
     </tr>
+
 </table>
 
 </body>

@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.validation.Valid;
 
+/**
+ * Created by Chris Bay
+ */
 @Controller
 @RequestMapping("eventCategories")
 public class EventCategoryController {
@@ -19,15 +23,13 @@ public class EventCategoryController {
     @Autowired
     private EventCategoryRepository eventCategoryRepository;
 
-    //displayAllEvents
     @GetMapping
-    public String displayAllEvents(Model model) {
+    public String displayAllCategories(Model model) {
         model.addAttribute("title", "All Categories");
         model.addAttribute("categories", eventCategoryRepository.findAll());
         return "eventCategories/index";
     }
 
-    //renderCreateEventCategoryForm
     @GetMapping("create")
     public String renderCreateEventCategoryForm(Model model) {
         model.addAttribute("title", "Create Category");
@@ -35,16 +37,17 @@ public class EventCategoryController {
         return "eventCategories/create";
     }
 
-    //processCreateEventCategoryForm
     @PostMapping("create")
-    public String processCreateEventCategoryForm(@ModelAttribute @Valid EventCategory newEventCategory,
-                                                Errors errors, Model model){
-        if(errors.hasErrors()){
+    public String processCreateEventCategoryForm(@Valid @ModelAttribute EventCategory eventCategory,
+                                                 Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
-                    return "eventCategories/create";
+            model.addAttribute(new EventCategory());
+            return "eventCategories/create";
         }
 
-        eventCategoryRepository.save(newEventCategory);
+        eventCategoryRepository.save(eventCategory);
         return "redirect:";
     }
 
